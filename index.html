@@ -16,15 +16,16 @@
       </p>
     </div>
     <script>
-      const increment = RTK.createAction('INCREMENT')
-      const decrement = RTK.createAction('DECREMENT')
-
-      const counter = RTK.createReducer(0, {
-        [increment]: (state) => state + 1,
-        [decrement]: (state) => state - 1,
+      const counterSlice = RTK.createSlice({
+        name: 'counter',
+        initialState: 0,
+        reducers: {
+          increment: (state) => state + 1,
+          decrement: (state) => state - 1,
+        },
       })
 
-      var store = RTK.configureStore({reducer: counter})
+      var store = RTK.configureStore({reducer: counterSlice.reducer})
       var valueEl = document.getElementById('value')
 
       function render() {
@@ -36,25 +37,25 @@
 
       document.getElementById('increment')
         .addEventListener('click', function () {
-          store.dispatch(increment())
+          store.dispatch(counterSlice.actions.increment())
         })
 
       document.getElementById('decrement')
         .addEventListener('click', function () {
-          store.dispatch(decrement())
+          store.dispatch(counterSlice.actions.decrement())
         })
 
       document.getElementById('incrementIfOdd')
         .addEventListener('click', function () {
           if (store.getState() % 2 !== 0) {
-            store.dispatch(increment())
+            store.dispatch(counterSlice.actions.increment())
           }
         })
 
       document.getElementById('incrementAsync')
         .addEventListener('click', function () {
           setTimeout(function () {
-            store.dispatch(increment())
+            store.dispatch(counterSlice.actions.increment())
           }, 1000)
         })
     </script>
