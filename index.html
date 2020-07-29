@@ -15,15 +15,26 @@
       </p>
     </div>
     <script>
+      const INCREMENT = 'INCREMENT'
+      const DECREMENT = 'DECREMENT'
+
+      const increment = () => ({
+        type: INCREMENT
+      })
+
+      const decrement = () => ({
+        type: DECREMENT
+      })
+
       function counter(state, action) {
         if (typeof state === 'undefined') {
           return 0
         }
 
         switch (action.type) {
-          case 'INCREMENT':
+          case INCREMENT:
             return state + 1
-          case 'DECREMENT':
+          case DECREMENT:
             return state - 1
           default:
             return state
@@ -42,25 +53,25 @@
 
       document.getElementById('increment')
         .addEventListener('click', function () {
-          store.dispatch({ type: 'INCREMENT' })
+          store.dispatch(decrement())
         })
 
       document.getElementById('decrement')
         .addEventListener('click', function () {
-          store.dispatch({ type: 'DECREMENT' })
+          store.dispatch(decrement())
         })
 
       document.getElementById('incrementIfOdd')
         .addEventListener('click', function () {
           if (store.getState() % 2 !== 0) {
-            store.dispatch({ type: 'INCREMENT' })
+            store.dispatch(increment())
           }
         })
 
       document.getElementById('incrementAsync')
         .addEventListener('click', function () {
           setTimeout(function () {
-            store.dispatch({ type: 'INCREMENT' })
+            store.dispatch(increment())
           }, 1000)
         })
     </script>
