@@ -16,16 +16,8 @@
       </p>
     </div>
     <script>
-      const INCREMENT = 'INCREMENT'
-      const DECREMENT = 'DECREMENT'
-
-      const increment = () => ({
-        type: INCREMENT
-      })
-
-      const decrement = () => ({
-        type: DECREMENT
-      })
+      const increment = RTK.createAction('INCREMENT')
+      const decrement = RTK.createAction('DECREMENT')
 
       function counter(state, action) {
         if (typeof state === 'undefined') {
@@ -33,9 +25,9 @@
         }
 
         switch (action.type) {
-          case INCREMENT:
+          case increment.type:
             return state + 1
-          case DECREMENT:
+          case decrement.type:
             return state - 1
           default:
             return state
