@@ -19,20 +19,10 @@
       const increment = RTK.createAction('INCREMENT')
       const decrement = RTK.createAction('DECREMENT')
 
-      function counter(state, action) {
-        if (typeof state === 'undefined') {
-          return 0
-        }
-
-        switch (action.type) {
-          case increment.type:
-            return state + 1
-          case decrement.type:
-            return state - 1
-          default:
-            return state
-        }
-      }
+      const counter = RTK.createReducer(0, {
+        [increment]: (state) => state + 1,
+        [decrement]: (state) => state - 1,
+      })
 
       var store = RTK.configureStore({reducer: counter})
       var valueEl = document.getElementById('value')
@@ -46,7 +36,7 @@
 
       document.getElementById('increment')
         .addEventListener('click', function () {
-          store.dispatch(decrement())
+          store.dispatch(increment())
         })
 
       document.getElementById('decrement')
