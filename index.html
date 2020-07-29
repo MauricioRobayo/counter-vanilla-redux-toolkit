@@ -3,6 +3,7 @@
   <head>
     <title>Redux basic example</title>
     <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+    <script src="https://unpkg.com/@reduxjs/toolkit@1.4.0/dist/redux-toolkit.umd.js"></script>
   </head>
   <body>
     <div>
@@ -41,7 +42,7 @@
         }
       }
 
-      var store = Redux.createStore(counter)
+      var store = RTK.configureStore({reducer: counter})
       var valueEl = document.getElementById('value')
 
       function render() {
